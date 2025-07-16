@@ -1,0 +1,65 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Base Colors */
+:root {
+  --void-black: #0A0F16;
+  --treasure-gold: #FFD166;
+  --globe-blue: #3DCCC7;
+  --silver-metal: #c0c0c0;
+  --silver-light: #e0e0e0;
+}
+
+body {
+  background-color: var(--void-black);
+  color: white;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--treasure-gold);
+  border-radius: 10px;
+  border: 2px solid var(--void-black);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #fdd878;
+}
+
+/* Card and Border Effects */
+.culture-card, .product-card {
+  position: relative;
+  overflow: hidden;
+  background: rgba(20, 20, 30, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 209, 102, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+              inset 0 0 20px rgba(255, 209, 102, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.culture-card:hover, .product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 45px rgba(255, 209, 102, 0.25),
+              inset 0 0 30px rgba(255, 209, 102, 0.3);
+}
+
+/* Utility classes */
+.bg-void-black { background-color: var(--void-black); }
+.text-treasure-gold { color: var(--treasure-gold); }
+.bg-treasure-gold { background-color: var(--treasure-gold); }
+.border-treasure-gold { border-color: var(--treasure-gold); }
+.text-globe-blue { color: var(--globe-blue); }
+.bg-globe-blue { background-color: var(--globe-blue); }
+.text-silver-metal { color: var(--silver-metal); }
+.bg-silver-metal { background-color: var(--silver-metal); }
+.text-silver-light { color: var(--silver-light); }
+.bg-silver-light { background-color: var(--silver-light); }

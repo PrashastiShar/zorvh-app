@@ -1,0 +1,203 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input AddItemToCartInput {
+  productId: ID!
+  quantity: Int!
+}
+
+type AuthResponse {
+  accessToken: String!
+  user: User!
+}
+
+type Cart {
+  createdAt: DateTime!
+  id: ID!
+  items: [CartItem!]!
+  total: Float!
+  updatedAt: DateTime!
+  user: User!
+}
+
+type CartItem {
+  cart: Cart!
+  createdAt: DateTime!
+  id: ID!
+  price: Float!
+  product: Product!
+  quantity: Int!
+  updatedAt: DateTime!
+}
+
+type Category {
+  createdAt: DateTime!
+  description: String
+  id: ID!
+  name: String!
+  products: [Product!]
+  updatedAt: DateTime!
+}
+
+input CreateCategoryInput {
+  description: String
+  name: String!
+}
+
+input CreateProductInput {
+  brand: String!
+  categoryId: ID!
+  colors: [String!]
+  description: String
+  imageUrls: [String!]
+  name: String!
+  price: Float!
+  sizes: [String!]
+  stock: Int!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  addItemToCart(input: AddItemToCartInput!): Cart!
+  clearMyCart: Cart!
+  createCategory(createCategoryInput: CreateCategoryInput!): Category!
+  createProduct(createProductInput: CreateProductInput!): Product!
+  login(loginInput: LoginInput!): AuthResponse!
+  register(registerInput: RegisterInput!): User!
+  removeCategory(id: ID!): Boolean!
+  removeItemFromCart(input: RemoveItemFromCartInput!): Cart!
+  removeProduct(id: ID!): Boolean!
+  updateCartItemQuantity(input: UpdateCartItemInput!): Cart!
+  updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
+  updateProduct(updateProductInput: UpdateProductInput!): Product!
+}
+
+type Order {
+  createdAt: DateTime!
+  id: ID!
+  items: [OrderItem!]!
+  paymentDetails: String
+  paymentIntentId: String
+  paymentMethod: String
+  shippingAddress: String!
+  shippingCost: Float
+  status: OrderStatus!
+  taxAmount: Float
+  total: Float!
+  updatedAt: DateTime!
+  user: User!
+}
+
+type OrderItem {
+  id: ID!
+  name: String!
+  order: Order!
+  price: Float!
+  product: Product!
+  quantity: Int!
+  size: String
+  subTotal: Float!
+}
+
+enum OrderStatus {
+  CANCELLED
+  DELIVERED
+  FAILED
+  PAID
+  PARTIALLY_REFUNDED
+  PAYMENT_FAILED
+  PENDING
+  PROCESSING
+  REFUNDED
+  SHIPPED
+}
+
+type Product {
+  brand: String
+  cartItems: [CartItem!]
+  category: Category!
+  colors: [String!]!
+  createdAt: DateTime!
+  description: String
+  id: ID!
+  imageUrls: [String!]
+  name: String!
+  price: Float!
+  sizes: [String!]!
+  stock: Int!
+  updatedAt: DateTime!
+}
+
+type Query {
+  categories: [Category!]!
+  category(id: ID!): Category!
+
+  """Returns the currently authenticated user"""
+  me: User!
+  myCart: Cart!
+  product(id: ID!): Product!
+  products: [Product!]!
+}
+
+input RegisterInput {
+  email: String!
+  firstName: String
+  lastName: String
+  password: String!
+}
+
+input RemoveItemFromCartInput {
+  cartItemId: ID!
+}
+
+input UpdateCartItemInput {
+  cartItemId: ID!
+  quantity: Int!
+}
+
+input UpdateCategoryInput {
+  description: String
+  id: ID!
+  name: String
+}
+
+input UpdateProductInput {
+  brand: String
+  categoryId: ID
+  colors: [String!]
+  description: String
+  id: ID!
+  imageUrls: [String!]
+  name: String
+  price: Float
+  sizes: [String!]
+  stock: Int
+}
+
+type User {
+  cart: Cart
+  createdAt: DateTime!
+  email: String!
+  firstName: String
+  id: ID!
+  lastName: String
+  orders: [Order!]!
+  role: UserRole!
+  updatedAt: DateTime!
+}
+
+"""The role of the user within the application."""
+enum UserRole {
+  ADMIN
+  CUSTOMER
+}
